@@ -1,0 +1,29 @@
+<%= form_for :post, url: main_submit_path do |f| %>
+
+  <p>Seleciona as cadeiras que pretendes adicionar:</p>
+  
+  <ul>
+    <% @folders.each_index do |i| %>
+      <% folder = @folders[i] %>
+      <li><%= folder[:name] %></li>
+      <ul>
+        <% folder[:subfolders].each_index do |j| %>
+          <li>
+            <%= f.check_box [i,j] %>
+            <%= f.label [i,j], folder[:subfolders][j] %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </ul>
+  
+  <p>
+    <%= f.label :email, "Endereço de email:" %><br>
+    <%= f.text_field :email %>
+  </p>
+  
+  <p>
+    O script poderá demorar alguns minutos a executar, por favor não o submetas mais do que uma vez <br />
+    <%= f.submit "Submeter" %>
+  </p>
+<% end %>
