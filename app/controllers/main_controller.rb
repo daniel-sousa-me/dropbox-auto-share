@@ -126,7 +126,6 @@ class MainController < ApplicationController
       folder[:subfolders].each do |subfolder|
         driver.navigate.to "http://dropbox.com/home/LMAC/#{folder[:name]}/#{subfolder[:name]}"
         sleep 3
-        puts "http://dropbox.com/home/LMAC/#{folder[:name]}/#{subfolder[:name]}"
         share_button = driver.find_element(:id, 'global_share_button')
         share_button.click
         sleep 2
