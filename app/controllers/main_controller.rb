@@ -125,11 +125,11 @@ class MainController < ApplicationController
     folders_s.each do |folder|
       folder[:subfolders].each do |subfolder|
         driver.navigate.to "http://dropbox.com/home/LMAC/#{folder[:name]}/#{subfolder[:name]}"
-        sleep 1
+        sleep 3
         puts "http://dropbox.com/home/LMAC/#{folder[:name]}/#{subfolder[:name]}"
         share_button = driver.find_element(:id, 'global_share_button')
         share_button.click
-        sleep 1
+        sleep 2
         email_input = driver.find_element(:id, 'sharing-options-new-collab-input')
         email_input.click
         driver.execute_script("document.getElementById('sharing-options-new-collab-input').value = '#{params[:post][:email]}'")
