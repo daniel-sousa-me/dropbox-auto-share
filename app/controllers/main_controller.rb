@@ -114,6 +114,7 @@ class MainController < ApplicationController
     headless.start
     
     driver = Selenium::WebDriver.for :firefox
+    driver.manage.timeouts.implicit_wait = 10
     driver.navigate.to "http://dropbox.com/login"
     
     driver.execute_script("document.getElementById('login_email').value = '#{app_config["DROPBOX_EMAIL"]}'")
@@ -121,14 +122,12 @@ class MainController < ApplicationController
     element_signin = driver.find_element(:id, 'login_submit')
     element_signin.click
     
-    # FIXME: Remove the ugly sleeps
     folders_s.each do |folder|
       folder[:subfolders].each do |subfolder|
         driver.navigate.to "http://dropbox.com/home/LMAC/#{folder[:name]}/#{subfolder[:name]}"
-        sleep 3
         share_button = driver.find_element(:id, 'global_share_button')
         share_button.click
-        sleep 2
+
         email_input = driver.find_element(:id, 'sharing-options-new-collab-input')
         email_input.click
         driver.execute_script("document.getElementById('sharing-options-new-collab-input').value = '#{params[:post][:email]}'")
