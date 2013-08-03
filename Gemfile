@@ -7,3 +7,4 @@ gem 'rails'
 gem 'sqlite3'
 
 gem 'selenium-webdriver'
+gem "headless"
