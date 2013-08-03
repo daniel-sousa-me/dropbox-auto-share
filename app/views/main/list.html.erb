@@ -5,15 +5,17 @@
   <ul>
     <% @folders.each_index do |i| %>
       <% folder = @folders[i] %>
-      <li><%= folder[:name] %></li>
-      <ul>
-        <% folder[:subfolders].each_index do |j| %>
-          <li>
-            <%= f.check_box [i,j] %>
-            <%= f.label [i,j], folder[:subfolders][j] %>
-          </li>
-        <% end %>
-      </ul>
+      <li><a href="#" onclick="Toggle('suboptions<%= i %>'); return false;"><%= folder[:name] %></a></li>
+      <div id="suboptions<%= i %>" style="display: none;">
+        <ul>
+          <% folder[:subfolders].each_index do |j| %>
+            <li>
+              <%= f.check_box [i,j] %>
+              <%= f.label [i,j], folder[:subfolders][j] %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
   </ul>
   
