@@ -1,6 +1,7 @@
 #!/bin/env ruby
 # encoding: utf-8
 
+require "headless"
 require "selenium-webdriver"
 
 class MainController < ApplicationController
@@ -108,7 +109,10 @@ class MainController < ApplicationController
         folders_s << folders_s_i
       end
     end
-  
+    
+    headless = Headless.new
+    headless.start
+    
     driver = Selenium::WebDriver.for :firefox
     driver.navigate.to "http://dropbox.com/login"
     
@@ -122,6 +126,7 @@ class MainController < ApplicationController
       folder[:subfolders].each do |subfolder|
         driver.navigate.to "http://dropbox.com/home/LMAC/#{folder[:name]}/#{subfolder[:name]}"
         sleep 1
+        puts "http://dropbox.com/home/LMAC/#{folder[:name]}/#{subfolder[:name]}"
         share_button = driver.find_element(:id, 'global_share_button')
         share_button.click
         sleep 1
@@ -136,5 +141,6 @@ class MainController < ApplicationController
     driver.navigate.to "http://dropbox.com/logout"
     
     driver.quit
+    headless.destroy
   end
 end
