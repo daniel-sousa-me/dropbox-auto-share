@@ -61,7 +61,6 @@ class MainController < ApplicationController
        "[Topo] Topologia",
      ]
     },
-    TODO: Adicionar MMA e DMat
     {:name => "4 – [MMA] Mestrado Bolonha em Matemática e Aplicações",
      :subfolders => [
        "[AAva] Algoritmos Avançados",
