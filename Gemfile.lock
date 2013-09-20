@@ -30,6 +30,11 @@ GEM
     builder (3.1.4)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
+    delayed_job (4.0.0)
+      activesupport (>= 3.0, < 4.1)
+    delayed_job_active_record (4.0.0)
+      activerecord (>= 3.0, < 4.1)
+      delayed_job (>= 3.0, < 4.1)
     erubis (2.7.0)
     ffi (1.9.0)
     headless (1.0.1)
@@ -89,6 +94,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  delayed_job_active_record
   headless
   rails
   selenium-webdriver
