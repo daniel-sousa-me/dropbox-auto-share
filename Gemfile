@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails'
 
 gem 'delayed_job_active_record'
+gem 'daemons'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
