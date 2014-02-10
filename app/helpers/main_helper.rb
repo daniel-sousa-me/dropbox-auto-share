@@ -30,19 +30,21 @@ module MainHelper
     
       driver.execute_script("document.getElementById('login_email').value = '#{app_config["DROPBOX_EMAIL"]}'")
       driver.execute_script("document.getElementById('login_password').value = '#{app_config["DROPBOX_PASSWORD"]}'")
-      element_signin = driver.find_element(:id, 'login_submit')
+      element_signin = driver.find_element(:id, "login_submit")
       element_signin.click
     
       folders_s.each do |folder|
         folder[:subfolders].each do |subfolder|
           driver.navigate.to "http://dropbox.com/home/LMAC/#{folder[:name]}/#{subfolder[:name]}"
-          share_button = driver.find_element(:id, 'global_share_button')
+          share_button = driver.find_element(:id, "global_share_button")
           share_button.click
 
-          email_input = driver.find_element(:id, 'sharing-options-new-collab-input')
+          email_input = driver.find_element(:id, "sharing-options-new-collab-input")
           email_input.click
           driver.execute_script("document.getElementById('sharing-options-new-collab-input').value = '#{email}'")
-          send_button = driver.find_element(:id, 'share-invite-button')
+          
+          sleep 3
+          send_button = driver.find_element(:xpath, "//input[@value='Send invites']")
           send_button.click
         end
       end
