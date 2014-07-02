@@ -28,10 +28,12 @@ module MainHelper
       driver.manage.timeouts.implicit_wait = 10
       driver.navigate.to "http://dropbox.com/login"
     
-      driver.execute_script("document.getElementById('login_email').value = '#{app_config["DROPBOX_EMAIL"]}'")
-      driver.execute_script("document.getElementById('login_password').value = '#{app_config["DROPBOX_PASSWORD"]}'")
-      element_signin = driver.find_element(:id, "login_submit")
+      driver.execute_script("document.getElementsByName('login_email')[1].value = '#{app_config["DROPBOX_EMAIL"]}'")
+      driver.execute_script("document.getElementsByName('login_password')[1].value = '#{app_config["DROPBOX_PASSWORD"]}'")
+      element_signin = driver.find_element(:class, "login-button")
       element_signin.click
+
+      sleep 3
     
       folders_s.each do |folder|
         folder[:subfolders].each do |subfolder|
@@ -44,7 +46,7 @@ module MainHelper
           driver.execute_script("document.getElementById('sharing-options-new-collab-input').value = '#{email}'")
           
           sleep 3
-          send_button = driver.find_element(:xpath, "//input[@value='Send invites']")
+          send_button = driver.find_element(:xpath, "//button[text()='Send invites']")
           send_button.click
         end
       end
